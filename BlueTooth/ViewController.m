@@ -36,7 +36,7 @@
     return _session;
 }
 
-
+// 发布广播
 - (MCNearbyServiceAdvertiser *)advertiser {
     if (!_advertiser) {
         _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:self.peerID discoveryInfo:@{@"message":@"wangshan"} serviceType:@"WS-photo"];
@@ -44,6 +44,7 @@
     return _advertiser;
 }
 
+// 搜索设备
 - (MCNearbyServiceBrowser *)browser {
     if (!_browser) {
         _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:self.peerID serviceType:@"WS-photo"];
@@ -59,27 +60,23 @@
     // MultipeerConnectivity 中使用MCAdvertiserAssistant 来表示一个广播, 在创建广播时, 需要指定一个会话MCSession 对象, 将广播服务和会话关联起来
     // 一旦调用了广播的start 方法, 周边的设备就可以发现该广播, 并可以连接到这个服务
     
-//    MCAdvertiserAssistant *adv = [[MCAdvertiserAssistant alloc] initWithServiceType:@"WS-photo" discoveryInfo:@{@"message":@"我是消息"} session:self.session];
-    
-    
-    
     
     // 发现
     // MultipeerConnectivity 中提供了MCBrowserViewController 来展示可连接和已连接的设备
     
     
     
-    NSString *uuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    self.peerID = [[MCPeerID alloc] initWithDisplayName:uuid];
     
     
+    // 设置设备标识ID
+    NSString *deviceName = [[UIDevice currentDevice] name];
+    self.peerID = [[MCPeerID alloc] initWithDisplayName:deviceName];
     
+    // 广播
     self.advertiser.delegate = self;
     [self.advertiser startAdvertisingPeer];
     
-    
-    
-    
+    // 发现
     self.browser.delegate = self;
     [self.browser startBrowsingForPeers];
     
@@ -180,13 +177,17 @@
 
 
 #pragma mark - MCSessionDelegate
-// Remote peer changed state.
-- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state { // 跟踪会话状态   正在连接  已连接 未连接
-    // 监听连接, 一旦连接建立成功, 就可以通过MCSession 的connectedPeers 获得已经连接的设备
+// 监听会话连接状态
+- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state {
     
-//    MCSessionStateNotConnected,     // not in the session
-//    MCSessionStateConnecting,       // connecting to this peer
-//    MCSessionStateConnected         // connected to the session
+    /*
+     监听连接, 一旦连接建立成功, 就可以通过MCSession 的connectedPeers 获得已经连接的设备
+    
+    MCSessionStateNotConnected,     // not in the session
+    MCSessionStateConnecting,       // connecting to this peer
+    MCSessionStateConnected         // connected to the session
+     
+    */
     
     switch (state) {
         case MCSessionStateNotConnected:
@@ -197,8 +198,6 @@
             break;
         case MCSessionStateConnected:
             NSLog(@"已连接");
-            
-            
             break;
             
         default:
@@ -207,35 +206,39 @@
     
 }
 
-// Received data from remote peer.
+// 接收数据
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
-    // 接收数据
-    NSLog(@"接收数据完成");
+    
+    NSLog(@"接收数据");
     
     UIImage *image = [UIImage imageWithData:data];
     
     self.imageView.image = image;
 }
 
-// Received a byte stream from remote peer.
+
+
+// 接收数据流
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID {
     
     NSLog(@"接收数据流");
-
 }
 
-// Start receiving a resource from remote peer.
+// 开始接收资源resource数据
 - (void)session:(MCSession *)session didStartReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID withProgress:(NSProgress *)progress {
-
-    NSLog(@"开始接收数据");
+    
+    NSLog(@"%@", resourceName);
+    NSLog(@"开始接收资源resource数据");
 }
 
+// 资源resource数据接收完成
 // Finished receiving a resource from remote peer and saved the content
 // in a temporary location - the app is responsible for moving the file
 // to a permanent location within its sandbox.
 - (void)session:(MCSession *)session didFinishReceivingResourceWithName:(NSString *)resourceName fromPeer:(MCPeerID *)peerID atURL:(NSURL *)localURL withError:(nullable NSError *)error {
 
-    NSLog(@"接收数据完成");
+    NSLog(@"%@", resourceName);
+    NSLog(@"接收资源resource数据完成");
 
 }
 
@@ -275,12 +278,6 @@
     invitationHandler(YES, self.session); // 接受会话建立
 }
 
-//@optional
-// Advertising did not start due to an error.
-- (void)advertiser:(MCNearbyServiceAdvertiser *)advertiser didNotStartAdvertisingPeer:(NSError *)error {
-
-
-}
 
 
 
