@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="egR-Be-erK">
+                                <rect key="frame" x="179" y="85" width="243" height="225"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="243" id="l1J-ik-bdD"/>
+                                    <constraint firstAttribute="height" constant="225" id="vGN-Rh-JVK"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tMN-eQ-HAn">
+                                <rect key="frame" x="270" y="370" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="CMg-cQ-mzQ"/>
+                                    <constraint firstAttribute="width" constant="70" id="Ydg-sS-lWS"/>
+                                </constraints>
+                                <state key="normal" title="选择图片"/>
+                                <connections>
+                                    <action selector="selectImage" destination="BYZ-38-t0r" eventType="touchUpInside" id="FqL-D7-A3d"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZv-T5-K1H">
+                                <rect key="frame" x="395" y="370" width="70" height="40"/>
+                                <state key="normal" title="发送"/>
+                                <connections>
+                                    <action selector="send" destination="BYZ-38-t0r" eventType="touchUpInside" id="aPk-Kt-kMw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkR-Ni-eVy">
+                                <rect key="frame" x="135" y="370" width="70" height="40"/>
+                                <state key="normal" title="连接"/>
+                                <connections>
+                                    <action selector="connection" destination="BYZ-38-t0r" eventType="touchUpInside" id="FmJ-7N-UOO"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HZv-T5-K1H" firstAttribute="top" secondItem="tMN-eQ-HAn" secondAttribute="top" id="1fz-UN-COb"/>
+                            <constraint firstItem="tMN-eQ-HAn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4c9-Gr-FzI"/>
+                            <constraint firstItem="egR-Be-erK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4fb-V1-7Lc"/>
+                            <constraint firstItem="xkR-Ni-eVy" firstAttribute="height" secondItem="tMN-eQ-HAn" secondAttribute="height" id="7k1-lP-32N"/>
+                            <constraint firstItem="egR-Be-erK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="65" id="7lE-Cd-E6x"/>
+                            <constraint firstItem="tMN-eQ-HAn" firstAttribute="top" secondItem="egR-Be-erK" secondAttribute="bottom" constant="60" id="a5n-Ut-5m0"/>
+                            <constraint firstItem="xkR-Ni-eVy" firstAttribute="width" secondItem="tMN-eQ-HAn" secondAttribute="width" id="bDZ-iH-s6d"/>
+                            <constraint firstItem="HZv-T5-K1H" firstAttribute="leading" secondItem="tMN-eQ-HAn" secondAttribute="trailing" constant="60" id="hI1-Pg-1kw"/>
+                            <constraint firstItem="HZv-T5-K1H" firstAttribute="width" secondItem="tMN-eQ-HAn" secondAttribute="width" id="jYF-1J-6fh"/>
+                            <constraint firstItem="tMN-eQ-HAn" firstAttribute="leading" secondItem="xkR-Ni-eVy" secondAttribute="trailing" constant="60" id="kcG-Ug-ctf"/>
+                            <constraint firstItem="HZv-T5-K1H" firstAttribute="height" secondItem="tMN-eQ-HAn" secondAttribute="height" id="rtA-xv-WR5"/>
+                            <constraint firstItem="xkR-Ni-eVy" firstAttribute="top" secondItem="tMN-eQ-HAn" secondAttribute="top" id="txb-oY-gaT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="egR-Be-erK" id="is8-nw-QpD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="418"/>
+        </scene>
+    </scenes>
+</document>
